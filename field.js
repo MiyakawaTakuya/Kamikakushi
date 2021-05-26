@@ -1,7 +1,7 @@
 //canvasの設定
 var canvas = document.getElementById('canvas');
 canvas.width = 640;		//canvasの横幅（よこはば）
-canvas.height = 1280;	//canvasの縦幅（たてはば）
+canvas.height = 960;	//canvasの縦幅（たてはば）
 
 //コンテキストを取得
 var ctx = canvas.getContext('2d');
@@ -11,7 +11,7 @@ var rico = new Object();
 rico.img = new Image();
 rico.img.src = 'img test/chara.png';
 rico.x = 32 * 8;   //主人公の初期位置 画像左上の座標をどこに持ってくるか
-rico.y = 32 * 32;
+rico.y = 32 * 5;   //初期ボジション27で想定している
 rico.move = 0;
 
 //キーボードのオブジェクトを作成
@@ -46,8 +46,8 @@ var mapchipDeskmono = new Image();
 mapchipDeskmono.src = 'img test/deskmono.png';    //デスクもの横3*縦1
 var mapchipShelf = new Image();
 mapchipShelf.src = 'img test/shelf.png';    //棚ゴミ箱 横3*縦3
-// var mapchipWallPro = new Image();
-// mapchipWallpro.src = 'img test/wallpro.png';    // 横*縦
+var mapchipDeskmono = new Image();
+mapchipDeskmono.src = 'img test/deskmono.png';    // 横3*縦2
 
 
 
@@ -100,21 +100,21 @@ var map = [
     [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 25, 2, 1],  //壁見えがかり 扉 
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1],  //50謎の人
     [1, 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 0, 0, 0, 0, 1],   //55G
-    [1, 0, 0, 57, 0, 0, 6, 7, 8, 0, 0, 6, 7, 8, 0, 1],   //57小杉太郎先生
+    [1, 0, 0, 57, 0, 0, 36, 7, 8, 0, 0, 6, 7, 8, 0, 1],   //57小杉太郎先生
     [1, 0, 0, 0, 0, 0, 9, 10, 11, 0, 0, 9, 10, 11, 0, 1],
     [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 4, 0, 0, 0, 0, 0, 0, 60, 0, 0, 0, 0, 51, 0, 1],  //60ワトソン  51津曲さん
-    [1, 0, 0, 0, 0, 0, 6, 7, 8, 0, 0, 6, 7, 8, 0, 1],
-    [1, 0, 0, 0, 0, 0, 9, 10, 11, 0, 0, 9, 10, 11, 0, 1],
+    [1, 0, 0, 0, 0, 0, 6, 7, 8, 0, 0, 6, 7, 37, 0, 1],
+    [1, 0, 0, 0, 0, 0, 9, 10, 11, 0, 0, 9, 10, 38, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 56, 58, 0, 0, 0, 0, 0, 52, 0, 1],  //56上園さん 58犬   52C
-    [1, 0, 0, 0, 0, 0, 6, 7, 8, 0, 0, 6, 7, 8, 0, 1],
+    [1, 0, 0, 0, 0, 0, 36, 7, 8, 0, 0, 6, 7, 8, 0, 1],
     [1, 0, 0, 0, 0, 0, 9, 10, 11, 0, 0, 9, 10, 11, 0, 1],
     [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1],
     [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1],
     [1, 20, 20, 20, 20, 20, 20, 0, 0, 0, 0, 1, 1, 1, 1, 1],
     [1, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
-    [1, 30, 0, 0, 6, 8, 59, 0, 0, 0, 0, 1, 1, 1, 1, 1],  //59ウエハース
+    [1, 30, 0, 0, 36, 8, 59, 0, 0, 0, 0, 1, 1, 1, 1, 1],  //59ウエハース
     [1, 30, 0, 0, 12, 13, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
     [1, 30, 0, 0, 9, 11, 53, 0, 0, 0, 0, 1, 1, 1, 1, 1],  //53さちおかさん
     [1, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
@@ -150,7 +150,7 @@ function main() {
     // 塗りつぶす色を指定
     ctx.fillStyle = "rgba( 0, 0, 0 ,0)";
     // 塗りつぶす
-    ctx.fillRect(0, 0, 640, 1920);
+    ctx.fillRect(0, 0, 640, 960);
     //マップチップを表示する
     for (var y = 0; y < map.length; y++) {
         for (var x = 0; x < map[y].length; x++) {
@@ -188,6 +188,9 @@ function main() {
             if (map[y][x] === 33) ctx.drawImage(mapchipShelf, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //棚中 右よせ
             if (map[y][x] === 34) ctx.drawImage(mapchipShelf, 64, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //棚下端 右よせ
             if (map[y][x] === 35) ctx.drawImage(mapchipShelf, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //ゴミ箱
+            if (map[y][x] === 36) ctx.drawImage(mapchipDeskmono, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //デスクもの左上
+            if (map[y][x] === 37) ctx.drawImage(mapchipDeskmono, 64, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //デスクもの右上
+            if (map[y][x] === 38) ctx.drawImage(mapchipDeskmono, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //デスクもの右上
             if (map[y][x] === 50) ctx.drawImage(mapchipA, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //サブキャラ 扉 謎の人
             if (map[y][x] === 51) ctx.drawImage(mapchipB, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //サブキャラ 津曲
             if (map[y][x] === 52) ctx.drawImage(mapchipC, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //サブキャラ 
@@ -201,7 +204,6 @@ function main() {
             if (map[y][x] === 60) ctx.drawImage(mapchipW, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //サブキャラ ワトソン 
         }
     }
-
     //drawImage構文の解説
     //drawImage( image, sx, sy, sw, sh, dx, dy, dw, dh )
     //sx, syで、画像を読み込む部分の、左上の位置、
@@ -214,7 +216,29 @@ function main() {
 
     addEventListener("keydown", keydownfunc, false);
     addEventListener("keyup", keyupfunc, false);
+    let user_name = location.search.substring(1);
 
+    //////////////////////////////////////////
+    //会話イベント
+    //何かキーが押された時に発火
+    document.addEventListener("keydown", keyDownFunc);
+    //扉の前イベント //主人公に上側にあるオブジェクトに対して何かアクションを起こしたい時にこのIF文を使う
+    function keyDownFunc(event) {
+        const key_code = event.keyCode;
+        if (key_code === 13) {
+            var x = rico.x / 32;  //今主人公がいる座標位置
+            var y = rico.y / 32;
+            y--;                  //主人公の上へ座標の変数だけ切り替える
+            if (map[y][x] === 25) {   //主人公の上に扉があったら
+                // console.log("古畑任三郎でした");
+                window.location.href = 'field2.html?' + user_name;
+            };
+        }
+    };
+
+
+    //////////////////////////////////////////
+    //移動用・衝突判定のコード
     //方向キーが押されている場合は、主人公が移動する 
     if (rico.move === 0) {
         if (key.left === true) {
@@ -291,7 +315,7 @@ function keyupfunc(event) {
     if (key_code === 40) key.down = false;
 }
 
-
+//////////////////////////////////////////
 //バックグラウンドの装飾系 2Dマップ制作には関係ない
 //背景の幾何学JS
 particlesJS("particles-js", {
@@ -304,7 +328,7 @@ particlesJS("particles-js", {
             }
         },
         "color": {
-            "value": "#ffffff"//色
+            "value": "#FFFFFF", //G'sカラー
         },
         "shape": {
             "type": "polygon",//形状はpolygonを指定
@@ -342,7 +366,7 @@ particlesJS("particles-js", {
         "line_linked": {
             "enable": true,
             "distance": 150,
-            "color": "#ffffff",
+            "color": "#FFFFFF", //G'sカラー
             "opacity": 0.6,
             "width": 1
         },

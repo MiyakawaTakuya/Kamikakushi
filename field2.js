@@ -63,8 +63,7 @@ mapchipB.src = 'img test/B.png';
 // }
 
 
-var map = [
-    // [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+let map = [
     [20, 30, 31, 32, 21, 22, 23, 21, 22, 23, 21, 22, 23, 21, 22, 23, 23, 21, 22, 20],
     [20, 33, 34, 35, 24, 25, 26, 24, 25, 26, 24, 25, 26, 24, 25, 26, 26, 24, 25, 20],
     [20, 36, 37, 38, 27, 28, 29, 27, 28, 29, 27, 28, 29, 27, 28, 29, 29, 27, 28, 20],
@@ -84,8 +83,7 @@ var map = [
     [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
     [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
     [20, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 7, 20],
-    [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 0, 20, 20],
-
+    [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 98, 20, 20],
 ];
 
 
@@ -167,6 +165,8 @@ function main() {
             if (map[y][x] === 87) ctx.drawImage(mapchipPiano, 64, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
             if (map[y][x] === 88) ctx.drawImage(mapchipPiano, 96, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
             if (map[y][x] === 89) ctx.drawImage(mapchipPiano, 120, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 98) ctx.drawImage(mapchipJut, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  // 入り口部分の絨毯
+            if (map[y][x] === 99) ctx.drawImage(mapchip_flo, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //壁断面
         }
     }
     //drawImage構文の解説
@@ -181,6 +181,49 @@ function main() {
 
     addEventListener("keydown", keydownfunc, false);
     addEventListener("keyup", keyupfunc, false);
+    let user_name = location.search.substring(1);
+
+    //////////////////////////////////////////
+    //会話イベント
+    //何かキーが押された時に発火
+    document.addEventListener("keydown", keyDownFunc);
+    //扉の前イベント //主人公に上側にあるオブジェクトに対して何かアクションを起こしたい時にこのIF文を使う
+    function keyDownFunc(event) {
+        const key_code = event.keyCode;
+        if (key_code === 13) {
+            var x = rico.x / 32;  //今主人公がいる座標位置
+            var y = rico.y / 32;
+            y--;                  //主人公の上へ座標だけ切り替える
+            if (map[y][x] === 55) {   //主人公の上にブラックジャックステージがあったら
+                rico.move = 32;
+                key.push = 'left';
+            };
+        }
+        if (key_code === 13) {
+            var x = rico.x / 32;  //今主人公がいる座標位置
+            var y = rico.y / 32;
+            y++;                  //主人公の下へ座標だけ切り替える
+            if (map[y][x] === 41 || map[y][x] === 42 || map[y][x] === 43) {   //主人公の下にルーレットがあったら
+                rico.move = 32;
+                key.push = 'left';
+            } else { y--; };
+        }
+        if (key_code === 13) {
+            var x = rico.x / 32;  //今主人公がいる座標位置
+            var y = rico.y / 32;
+            y++;                  //主人公の下へ座標だけ切り替える
+            if (map[y][x] === 98) {   //主人公の下に入り口部分のパーツがあった場合
+                map[20][17] = 99;
+                console.log(map[20][17]);
+                // rico.move = 32;
+                // key.push = 'up';
+            } else { y--; };
+        }
+    };
+
+
+    //////////////////////////////////////////
+    //移動用・衝突判定のコード
 
     //方向キーが押されている場合は、主人公が移動する 
     if (rico.move === 0) {
@@ -216,7 +259,7 @@ function main() {
         if (key.down === true) {
             var x = rico.x / 32;
             var y = rico.y / 32;
-            if (y < 59) {          //下方向の移動上限
+            if (y < 18) {          //下方向の移動上限
                 y++;
                 if (map[y][x] === 0 || map[y][x] === 1 || map[y][x] === 2 || map[y][x] === 3 || map[y][x] === 4 || map[y][x] === 5 || map[y][x] === 6 || map[y][x] === 7 || map[y][x] === 8) {
                     rico.move = 32;
@@ -263,14 +306,14 @@ function keyupfunc(event) {
 particlesJS("particles-js", {
     "particles": {
         "number": {
-            "value": 110,//この数値を変更すると幾何学模様の数が増減できる
+            "value": 120,//この数値を変更すると幾何学模様の数が増減できる
             "density": {
                 "enable": true,
                 "value_area": 800
             }
         },
         "color": {
-            "value": "#ffffff"//色
+            "value": "#f2f2f3"//色
         },
         "shape": {
             "type": "polygon",//形状はpolygonを指定
@@ -278,7 +321,7 @@ particlesJS("particles-js", {
                 "width": 0,
             },
             "polygon": {
-                "nb_sides": 5//多角形の角の数
+                "nb_sides": 6//多角形の角の数
             },
             "image": {
                 "width": 190,
@@ -308,13 +351,13 @@ particlesJS("particles-js", {
         "line_linked": {
             "enable": true,
             "distance": 150,
-            "color": "#ffffff",
+            "color": "#00B4EF",
             "opacity": 0.6,
             "width": 1
         },
         "move": {
             "enable": true,
-            "speed": 8,//この数値を小さくするとゆっくりな動きになる
+            "speed": 6,//この数値を小さくするとゆっくりな動きになる
             "direction": "none",//方向指定なし
             "random": false,//動きはランダムにしない
             "straight": false,//動きをとどめない

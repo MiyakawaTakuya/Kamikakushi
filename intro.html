@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/intro.css">
+    <title>Kamikakushi</title>
+    <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
+    <link rel="stylesheet" type="text/css"
+        href="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-4/css/reset.css">
+</head>
+
+<body class="body">
+    <div id="app">
+        <div class="grad"><span id="typewriter"></span></div>
+    </div>
+    <script src="intro.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        //URL末尾？移行をユーザーネームとして情報を吸い上げる処理
+        let user_name = location.search.substring(1);
+        //それをブラウザに表示する
+        $('#name').text(user_name);
+        $('#next').on('click', function () {
+            //この行で、URLと入力した名前を合体させてページ遷移
+            const time_out = function () {
+                window.location.href = 'field.html?' + user_name;
+            };
+            setTimeout(time_out, 1500);
+        });
+    </script>
+</body>
+
+</html>
