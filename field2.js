@@ -39,15 +39,31 @@ var mapchipBlackjack = new Image();
 mapchipBlackjack.src = 'imgCasino/blackjack.png';   //ブラックジャック  横4*縦3
 var mapchipPiano = new Image();
 mapchipPiano.src = 'imgCasino/piano.png';   //ブラックジャック  横5*縦5
+var mapchipflowerL = new Image();
+mapchipflowerL.src = 'imgCasino/flowerL.png';   //flowerL.png
+var mapchipflowerR = new Image();
+mapchipflowerR.src = 'imgCasino/flowerR.png';   //flowerR.png
+var mapchipKanban = new Image();
+mapchipKanban.src = 'imgCasino/kanban.png';   //看板
+var mapchipSlot = new Image();
+mapchipSlot.src = 'imgCasino/slot.png';   //スロット
+var mapchiptable = new Image();
+mapchiptable.src = 'imgCasino/table.png';   //テーブル
+var mapchipSofa = new Image();
+mapchipSofa.src = 'imgCasino/sofa.png';   //ソファ
+var mapchipSakeshelf = new Image();
+mapchipSakeshelf.src = 'imgCasino/sakeshelf.png';   //酒の棚
 
 
 
 
 //サブキャラ配置
 var mapchipA = new Image();
-mapchipA.src = 'img test/A.png';
+mapchipA.src = 'imgCasino/dira1.png';
 var mapchipB = new Image();
-mapchipB.src = 'img test/B.png';
+mapchipB.src = 'imgCasino/dira3.png';
+var mapchipE = new Image();
+mapchipE.src = 'imgCasino/dira2.png';
 
 //画面を真ん中で固定して移動する
 // const fixPosX = Screen.Width * 0.5/32;
@@ -64,24 +80,24 @@ mapchipB.src = 'img test/B.png';
 
 
 let map = [
-    [20, 30, 31, 32, 21, 22, 23, 21, 22, 23, 21, 22, 23, 21, 22, 23, 23, 21, 22, 20],
-    [20, 33, 34, 35, 24, 25, 26, 24, 25, 26, 24, 25, 26, 24, 25, 26, 26, 24, 25, 20],
+    [20, 30, 31, 32, 21, 22, 23, 21, 22, 23, 21, 22, 23, 21, 100, 101, 102, 21, 22, 20],
+    [20, 33, 34, 35, 24, 25, 26, 24, 25, 26, 24, 25, 26, 24, 103, 104, 105, 24, 25, 20],
     [20, 36, 37, 38, 27, 28, 29, 27, 28, 29, 27, 28, 29, 27, 28, 29, 29, 27, 28, 20],
-    [20, 5, 2, 2, 2, 70, 71, 72, 73, 74, 75, 2, 2, 2, 2, 2, 2, 2, 6, 20],
-    [20, 1, 0, 0, 0, 85, 76, 77, 78, 79, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 80, 81, 82, 83, 84, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 85, 86, 87, 88, 89, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 51, 52, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 55, 56, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 40, 41, 42, 43, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 44, 45, 46, 47, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
-    [20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20],
+    [20, 5, 2, 2, 70, 71, 72, 73, 74, 2, 210, 211, 212, 213, 210, 211, 212, 213, 6, 20],
+    [20, 106, 0, 0, 76, 77, 78, 79, 80, 0, 214, 215, 216, 217, 214, 215, 216, 217, 107, 20],
+    [20, 106, 0, 0, 82, 83, 84, 85, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 20],
+    [20, 106, 0, 0, 88, 89, 90, 91, 92, 0, 218, 0, 0, 218, 0, 0, 218, 0, 107, 20],
+    [20, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 20],
+    [20, 106, 0, 0, 202, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0, 0, 107, 20],
+    [20, 106, 0, 50, 51, 52, 0, 0, 0, 0, 0, 0, 0, 0, 50, 51, 52, 0, 107, 20],
+    [20, 106, 0, 54, 55, 56, 0, 0, 219, 220, 221, 0, 0, 0, 54, 55, 56, 0, 107, 20],
+    [20, 106, 0, 0, 0, 0, 0, 0, 222, 223, 224, 0, 0, 0, 0, 0, 0, 0, 107, 20],
+    [20, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 20],
+    [20, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 20],
+    [20, 106, 0, 0, 0, 0, 0, 0, 0, 201, 40, 41, 42, 43, 0, 0, 0, 0, 107, 20],
+    [20, 106, 225, 226, 225, 226, 225, 226, 0, 0, 44, 45, 46, 47, 0, 0, 0, 0, 107, 20],
+    [20, 106, 227, 228, 227, 228, 227, 228, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 20],
+    [20, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 20],
     [20, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 7, 20],
     [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 98, 20, 20],
 ];
@@ -148,25 +164,59 @@ function main() {
             if (map[y][x] === 71) ctx.drawImage(mapchipPiano, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
             if (map[y][x] === 72) ctx.drawImage(mapchipPiano, 64, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
             if (map[y][x] === 73) ctx.drawImage(mapchipPiano, 96, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 74) ctx.drawImage(mapchipPiano, 120, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 75) ctx.drawImage(mapchipPiano, 152, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 74) ctx.drawImage(mapchipPiano, 128, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 75) ctx.drawImage(mapchipPiano, 160, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
             if (map[y][x] === 76) ctx.drawImage(mapchipPiano, 0, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 76) ctx.drawImage(mapchipPiano, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 77) ctx.drawImage(mapchipPiano, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 78) ctx.drawImage(mapchipPiano, 96, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 79) ctx.drawImage(mapchipPiano, 120, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 80) ctx.drawImage(mapchipPiano, 0, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 81) ctx.drawImage(mapchipPiano, 32, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 82) ctx.drawImage(mapchipPiano, 64, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 83) ctx.drawImage(mapchipPiano, 96, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 84) ctx.drawImage(mapchipPiano, 120, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 85) ctx.drawImage(mapchipPiano, 0, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 86) ctx.drawImage(mapchipPiano, 32, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 87) ctx.drawImage(mapchipPiano, 64, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 88) ctx.drawImage(mapchipPiano, 96, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
-            if (map[y][x] === 89) ctx.drawImage(mapchipPiano, 120, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 77) ctx.drawImage(mapchipPiano, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 78) ctx.drawImage(mapchipPiano, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 79) ctx.drawImage(mapchipPiano, 96, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 80) ctx.drawImage(mapchipPiano, 128, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 81) ctx.drawImage(mapchipPiano, 160, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 82) ctx.drawImage(mapchipPiano, 0, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 83) ctx.drawImage(mapchipPiano, 32, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 84) ctx.drawImage(mapchipPiano, 64, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 85) ctx.drawImage(mapchipPiano, 96, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 86) ctx.drawImage(mapchipPiano, 128, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 87) ctx.drawImage(mapchipPiano, 160, 64, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 88) ctx.drawImage(mapchipPiano, 0, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 89) ctx.drawImage(mapchipPiano, 32, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 90) ctx.drawImage(mapchipPiano, 64, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 91) ctx.drawImage(mapchipPiano, 96, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 92) ctx.drawImage(mapchipPiano, 128, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 93) ctx.drawImage(mapchipPiano, 160, 96, 32, 32, 32 * x, 32 * y, 32, 32);  //
             if (map[y][x] === 98) ctx.drawImage(mapchipJut, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  // 入り口部分の絨毯
             if (map[y][x] === 99) ctx.drawImage(mapchip_flo, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //壁断面
+            if (map[y][x] === 100) ctx.drawImage(mapchipKanban, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //看板
+            if (map[y][x] === 101) ctx.drawImage(mapchipKanban, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 102) ctx.drawImage(mapchipKanban, 64, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 103) ctx.drawImage(mapchipKanban, 0, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 104) ctx.drawImage(mapchipKanban, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 105) ctx.drawImage(mapchipKanban, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 106) ctx.drawImage(mapchipflowerL, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //花 左
+            if (map[y][x] === 107) ctx.drawImage(mapchipflowerR, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //花 右
+            // if (map[y][x] === 108) ctx.drawImage(mapchipflowerR, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //から
+            if (map[y][x] === 200) ctx.drawImage(mapchipA, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //A ディーラー
+            if (map[y][x] === 201) ctx.drawImage(mapchipE, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //E ディーラー
+            if (map[y][x] === 202) ctx.drawImage(mapchipB, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //B ディーラー
+            if (map[y][x] === 210) ctx.drawImage(mapchipSlot, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //スロット 2*5
+            if (map[y][x] === 211) ctx.drawImage(mapchipSlot, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 212) ctx.drawImage(mapchipSlot, 64, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 213) ctx.drawImage(mapchipSlot, 96, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 214) ctx.drawImage(mapchipSlot, 0, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 215) ctx.drawImage(mapchipSlot, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 216) ctx.drawImage(mapchipSlot, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 217) ctx.drawImage(mapchipSlot, 96, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 218) ctx.drawImage(mapchiptable, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //みにテーブル
+            if (map[y][x] === 219) ctx.drawImage(mapchipSofa, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //ソファ
+            if (map[y][x] === 220) ctx.drawImage(mapchipSofa, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 221) ctx.drawImage(mapchipSofa, 64, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 222) ctx.drawImage(mapchipSofa, 0, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 223) ctx.drawImage(mapchipSofa, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 224) ctx.drawImage(mapchipSofa, 64, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 225) ctx.drawImage(mapchipSakeshelf, 0, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //酒の棚
+            if (map[y][x] === 226) ctx.drawImage(mapchipSakeshelf, 32, 0, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 227) ctx.drawImage(mapchipSakeshelf, 0, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
+            if (map[y][x] === 228) ctx.drawImage(mapchipSakeshelf, 32, 32, 32, 32, 32 * x, 32 * y, 32, 32);  //
         }
     }
     //drawImage構文の解説
@@ -195,6 +245,7 @@ function main() {
             var y = rico.y / 32;
             y--;                  //主人公の上へ座標だけ切り替える
             if (map[y][x] === 55) {   //主人公の上にブラックジャックステージがあったら
+                window.location.href = 'index.html?' + user_name;
                 rico.move = 32;
                 key.push = 'left';
             };
@@ -213,8 +264,8 @@ function main() {
             var y = rico.y / 32;
             y++;                  //主人公の下へ座標だけ切り替える
             if (map[y][x] === 98) {   //主人公の下に入り口部分のパーツがあった場合
-                map[20][17] = 99;
-                console.log(map[20][17]);
+                map[19][17] = 99;
+                console.log(map[19][17]);
                 // rico.move = 32;
                 // key.push = 'up';
             } else { y--; };

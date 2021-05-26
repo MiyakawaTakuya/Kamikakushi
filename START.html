@@ -25,6 +25,7 @@
         <h1 class="title">Kamikakushi</h1>
         <h3 class="type">Plese type your name</h3>
         <input type="text" id='input_name' placeholder="        Users Name ">
+        <input type="text" id="my_money" placeholder="       ¥ Your Money ">
       </div>
       <div class="btn">
         <div class="signUp_btn">
@@ -59,8 +60,12 @@
           name: $('#input_name').val()
         };
         if (signUp_data.name != "") {
+          //現金の登録, 現金欄の値をnullに
+          const money = $('#my_money').val();
+          localStorage.setItem('hand_money', money);
+          $('#my_money').val('');
+          //ファイヤーベースに名前を追加する
           user_info.add(signUp_data);
-
           //この行で、URLと入力した名前を合体させてページ遷移
           const time_out = function () {
             window.location.href = 'intro.html?' + signUp_data.name;

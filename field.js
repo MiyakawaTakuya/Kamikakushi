@@ -1,7 +1,7 @@
 //canvasの設定
 var canvas = document.getElementById('canvas');
 canvas.width = 640;		//canvasの横幅（よこはば）
-canvas.height = 960;	//canvasの縦幅（たてはば）
+canvas.height = 1280;	//canvasの縦幅（たてはば）
 
 //コンテキストを取得
 var ctx = canvas.getContext('2d');
@@ -234,7 +234,18 @@ function main() {
                 window.location.href = 'field2.html?' + user_name;
             };
         }
-    };
+        if (key_code === 13) {
+            var x = rico.x / 32;  //今主人公がいる座標位置
+            var y = rico.y / 32;
+            y--;                  //主人公の上へ座標の変数だけ切り替える
+            if (map[y][x] === 57) {  //主人公の上にタロさんがいたら
+                rico.move = 32;
+                key.push = 'left';
+                // alert("天気教えねえょ");
+            } else { y++; };
+        };
+    }
+
 
 
     //////////////////////////////////////////
