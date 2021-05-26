@@ -7,13 +7,53 @@ canvas.height = 640;	//canvasの縦幅（たてはば）
 //コンテキストを取得
 var ctx = canvas.getContext('2d');
 
+
+// 角田がいじった場所------------------------------------------------------------------------------
+//URL末尾を取り出し、どこから遷移してきたのかを判別し初期値を決める
+let url_parts_1 = location.search.substring(1);
+let user_beforePage = [];
+if (url_parts_1) {
+    // 「&」が含まれている場合は「&」で分割
+    let param = url_parts_1.split('&');
+    user_beforePage = param[1];
+}
+
 //主人公オブジェクトを作成
-var rico = new Object();
-rico.img = new Image();
-rico.img.src = 'img test/chara.png';
-rico.x = 32 * 17;   //主人公の初期位置 画像左上の座標をどこに持ってくるか
-rico.y = 32 * 19;
-rico.move = 0;
+if (user_beforePage == 1) {
+    var rico = new Object();
+    rico.img = new Image();
+    rico.img.src = 'img test/chara.png';
+    rico.x = 32 * 15;   //主人公の初期位置 画像左上の座標をどこに持ってくるか
+    rico.y = 32 * 11;
+    rico.move = 0;
+} else if (user_beforePage == 2) {
+    var rico = new Object();
+    rico.img = new Image();
+    rico.img.src = 'img test/chara.png';
+    rico.x = 32 * 12;   //主人公の初期位置 画像左上の座標をどこに持ってくるか
+    rico.y = 32 * 13;
+    rico.move = 0;
+} else if (user_beforePage == 3) {     //--------------------指定先なし（ご自由にお使いください）
+    var rico = new Object();
+    rico.img = new Image();
+    rico.img.src = 'img test/chara.png';
+    rico.x = 32 * 17;   //主人公の初期位置 画像左上の座標をどこに持ってくるか
+    rico.y = 32 * 19;
+    rico.move = 0;
+} else {
+    var rico = new Object();
+    rico.img = new Image();
+    rico.img.src = 'img test/chara.png';
+    rico.x = 32 * 17;   //主人公の初期位置 画像左上の座標をどこに持ってくるか
+    rico.y = 32 * 19;
+    rico.move = 0;
+}
+//----------------------------------------------------------------------------------------------
+
+
+
+
+
 
 //キーボードのオブジェクトを作成
 var key = new Object();
@@ -231,8 +271,19 @@ function main() {
 
     addEventListener("keydown", keydownfunc, false);
     addEventListener("keyup", keyupfunc, false);
-    let user_name = location.search.substring(1);
 
+    let url_parts_0 = location.search.substring(1);
+    let user_name = [];
+    if (url_parts_0) {
+        // 「&」が含まれている場合は「&」で分割
+        let param = url_parts_0.split('&');
+        user_name = param[0];
+    }
+
+
+
+
+    // 角田がいじった場所------------------------------------------------------------------------------
     //////////////////////////////////////////
     //会話イベント
     //何かキーが押された時に発火
@@ -245,18 +296,25 @@ function main() {
             var y = rico.y / 32;
             y--;                  //主人公の上へ座標だけ切り替える
             if (map[y][x] === 55) {   //主人公の上にブラックジャックステージがあったら
-                window.location.href = 'index.html?' + user_name;
+                window.location.href = 'index.html?' + user_name + '&1';
                 rico.move = 32;
                 key.push = 'left';
             };
         }
+        //----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
         if (key_code === 13) {
             var x = rico.x / 32;  //今主人公がいる座標位置
             var y = rico.y / 32;
             y++;                  //主人公の下へ座標だけ切り替える
-            if (map[y][x] === 41 || map[y][x] === 42 || map[y][x] === 43) {   //主人公の下にルーレットがあったら
-                rico.move = 32;
-                key.push = 'left';
+            if (map[y][x] === 42) {   //主人公の下にルーレットがあったら
+                window.location.href = 'roulette.html?' + user_name + '&2';
             } else { y--; };
         }
         if (key_code === 13) {
@@ -264,10 +322,7 @@ function main() {
             var y = rico.y / 32;
             y++;                  //主人公の下へ座標だけ切り替える
             if (map[y][x] === 98) {   //主人公の下に入り口部分のパーツがあった場合
-                map[19][17] = 99;
-                console.log(map[19][17]);
-                // rico.move = 32;
-                // key.push = 'up';
+                map[19][17] = 99;   //主人公が出ようとしたら壁で塞がる 神隠し
             } else { y--; };
         }
     };

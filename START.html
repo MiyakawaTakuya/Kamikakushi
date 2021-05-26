@@ -31,6 +31,10 @@
         <div class="signUp_btn">
           <a id="sign_up">Game Start</a>
         </div>
+        <div class="input_error">
+          <p id="error_comment_1"></p>
+          <p id="error_comment_2"></p>
+        </div>
       </div>
     </div>
     <footer class="copyrights">
@@ -56,14 +60,17 @@
 
     <script>
       $('#sign_up').on('click', function () {
+        $('#error_comment_1').text('');
+        $('#error_comment_2').text('');
+
+
         const signUp_data = {
           name: $('#input_name').val()
         };
-        if (signUp_data.name != "") {
-          //現金の登録, 現金欄の値をnullに
-          const money = $('#my_money').val();
+        //現金の登録, 現金欄の値をnullに
+        const money = $('#my_money').val();
+        if (signUp_data.name != "" && money >= 10000) {
           localStorage.setItem('hand_money', money);
-          $('#my_money').val('');
           //ファイヤーベースに名前を追加する
           user_info.add(signUp_data);
           //この行で、URLと入力した名前を合体させてページ遷移
@@ -71,8 +78,15 @@
             window.location.href = 'intro.html?' + signUp_data.name;
           };
           setTimeout(time_out, 1500);
+        } else if (signUp_data.name == '') {
+          console.log(signUp_data.name);
+          $('#error_comment_1').text('お名前を教えてください');
+        } else if (money < 10000 || money == null) {
+          $('#error_comment_2').text('The lower limit is 10,000 yen.');
         }
-        $('#input_name').val('');
+
+
+
       });
     </script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
